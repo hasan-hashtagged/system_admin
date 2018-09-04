@@ -329,20 +329,28 @@ and test command follows ASCII values to determine the < or >.
 if a variable was not defined it will be considered as string of length 0
 :::::
 FILE COMPARISION:
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-d file 	checks if such file exists as directory
+-e file		checks if object exists or not
+-f file		if it exists and is file
+-r file		if file exists and it can be read
+-s file 	if file exists and is not empty
+-w file 	if file exists and is writable
+-x file 	if file exists and is executable
+-O file 	checking the ownership of the file
+-G file 	checks the default group of the file
+file1 -nt file2	checks whether file1 is newer than file2 //dont check it if file doesnt exist
+file1 -ot file2	check if file1 is older than file2
+::::::::::::::::::::::::::::::::::::::::::::::::
+compound test : if [ c1 ] && [ c2 ]
+if [ c1 ] || [ c2 ]
+:::::::::::::::::::::::::::::::::::::::::::::::
+if (( advanced_math_ins )) //dont escape the symbols
+if [[ advanced_str_cmp ]]  //regular exp
+::::::::::::::::::::::::::::::::::::::
+CASE COMMAND
+	case <variable> in
+		pattern1 | pattern2) c1;;
+		pattern3) c2;;
+		*) default c3;;
+	esac
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
