@@ -1,0 +1,348 @@
+four parts that makes up linux:
+1.the kernel
+	allocation of hardware when necessary and execution of software.
+	main tasks:
+		system memory management,software program management,hardware management,file system management.
+		a).memory management:kernel not only manages primary memory but also creates virtual memory using swap space.memory locations are 				grouped together into blocks called pages.
+			kernel makes table to ensure what is in memory and what is in swapped space.proc/meminfo file maintain the thing about memory.
+			ipcs command shows currently available shared memory pages.
+		b).software program management: kernel creates the first program called init.there are run levels that allow only certain process to
+			be executed.5 run levels.run level 1 is single user mode happens only when there is some crash. only administrator can login.
+			standard int run level is 3 where all program run. at 5 it start desktop.
+			ps command: S sleeping SW sleeping and waiting R running process in brackets have been swapped out.
+		c).hardware management: connect devices if driver code is inserted in the kernel.
+			drivers compiled in the kernel
+			driver module added to kernel
+			device file as linux treats everything as file.
+				character device file which read one character at a time(modem)
+				block device file which read a block of data(disk drives)
+				network files use packet to send and receive data.eg netwok card
+				linux creates device node which are number pair to communicate with kernel.
+		d).file system management:can read and write various file system.
+2. GNU UTILITIES:to control file and program
+	core bundles of utilities in coreutils
+	utilities for handling files. utilities for manipulating text.and for managing processes.
+3. linux desktop environment:for gui
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+character set is a binary command to show characters
+control codes:cursor location on screen
+block mode graphics:ansi codes used to show boxes and all.
+::::
+TERMINFO DATABASE:special set of file(characterstics of various terminals used)
+************** infocmp command used to convert binary entry to text****************************
+TERM variable to tell about default terminal
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+the passwd file
+	username:password:userid:groupid:user fullname:location of home:default shell
+BASH COMMAND LINE PARAMETER:
+-c string read command from string
+-r start bash in restricted mode
+-i start an interactive shell
+-s read command from standard input
+PS1 control primary commmand prompt
+PS2 secondary prompt
+\a bell character
+\d date in "day month date"
+\e ascii escape character
+\h local host name
+\H fully qualified domain hostname
+\j number of jobs in process
+\l the basename of shell's terminal device name
+\n newline
+\r carriage return
+\s name of shell
+\t time 24 hr hhmmss
+\T time 12 hrs hhmmss
+\@ time 12 hrs am/pm
+\u current user
+\v version of bash
+\V release level of bash
+\w current working directory
+\W basename of current working directory
+\! history number of command
+\# command number of this command
+\$ for home user it is same if root then pound
+\nnn character corresponding to octal value nnn
+\\ backslash
+\[ begins a control code sequence
+\] ends a control code sequence
+::::::::::::::::::::::::::::::::::::::::::::;
+FILESYSTEM NAVIGATION
+the virtual directory merge all storage device to a single location.base location is root
+creates mount point for additional storage.
+/ root of virtual directory
+/bin binary directory where user level utilities are stored
+/boot boot files are stored
+/dev here linux creates device nodes
+/etc configuration files
+/home home folders of various users are here
+/lib application and system library are there
+/media mount place of removable device
+/mnt another mount area
+/opt optional software package
+/root root home directory
+/sbin admin level utilities system binary
+/tmp temporary directory
+/usr user installed software directory
+/var variable directory such as log file
+-F in ls comand to distinguish bertween files and directory
+-p in cp command to preserve modificaiton time or file access
+hard link can be created on same mount points else we use soft links
+soft link have different inode value and different sizes
+stat command complete information about the file
+file command tells u about the file type text file data file and executable file
+-n in cat shows line number
+-b in cat tells us about number which have text in it
+-s to compress multiple blank lines,-T to remove tabs
+more command page wise data
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ps command to view the program running bash
+unix style parameter:
+-A show all the processes
+-N shows opposite of the parameter
+-a shows all the process except session header and program without terminal
+-d all except session header
+-e all
+ps -l also shows f(flag assigned to the process by kernel) S(state of the process) PRI(priorty of the process) NI(nice value)WCHAN(address of kernel functioin where the process is sleeping).
+-H organises in hierarchical model.
+BSD style (berkely software design)
+important tags: l adds aditional column (stat which is two character code) the second character is < process at higher priorty
+N process running at lower priorty L the process has page locked in memory s the process is session leader l multi threaded + foreground
+***top command showe real time process update***
+signals		name	description
+1			HUP		hang up
+2			INT		INTERRUPT
+3			QUIT	STOP RUNNING
+9			KILL	UNCONDITIONAL TERMINATE
+11			SEGV	SEGMENT VIOLATION
+15			TERM	TERMINATE IF POSSIBLE
+17			STOP	STOP UNCON. BUT DONT TERMINATE
+18			TSTP	STOP OR PAUSE,BUT RUN IN BACKGROUND
+19			CONT	RESUME EXECUTION AFTER STOP OR TSTP
+kill command send TERM signal to process with pid mentioned(-s <signame> for forcefully)
+killall stops all the processes running
+disk space monitering:
+	mounting is the process of placing media disk in virtual disk.
+	mount command displays lists of media devices mounted
+	(device location of medium,mount point in virtual directory,filesystem type,access status of device)
+	mount -t <filesystemtype> device directory
+	.iso file can be mounted and behave as it wascd running
+	umount to remove a media from virtual directory
+	df command toview disk space(device location,no. of blocks(kilo) it can hold,no. of blocks used,available,percent,mount location)
+	du disk usage for current directory
+WORKING WITH DATA FILES:
+sort according to standard rule	,-n command to numerical sort,-M for month sort,-k and -t used in combination to select the field and delimter respectively.
+grep command to search pattern 
+grep options <pattern> <file>
+Compressing data
+bzip2,gzip,zip
+tar command to archive the file 
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+printenv prints environmental variables
+set command displays all the variables set for a process.(including global)
+we can directly assign values to local variable we create just by writing the name and assignment(string should be in single quotes)
+decleraing global variable is exporting local variable using export commnad
+unset command to remove environment variable,if you are in a child process,the global variable will still be available in parent process.
+PATH=$PATH:<path to be added> (we can add . to insure the current working directory)
+ways of starting bash shell:
+	default login shell
+	interactive shell not the login shell
+	non-interactive shell to run script
+LOGIN SHELL:bash looks for files in order /etc/profile ~/.bash_profile ~/.bash_login ~/.profile
+/etc/profile is default startup file which bash executes
+remaning three are user specific startup file(anyone is present)
+INTERACTIVE SHELL:
+without login if bash is typed
+at that time .bashrc is run
+Non-Interactive shell
+when shell runs shell script
+VARIABLE ARRAYS:
+	var =(items)
+	${var[i]}
+	unset var[i] //var[i] will be unset without affecting other parts
+ALIAS:alias <name>=<command with/without parameter>(local)
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+file permission:
+core security is user id.permissions are tracked using this.
+/etc/passwd file:
+contents:
+login_name:password:user_id:grp_id:comment_field:location_of_home:default_shell
+root uid=0,
+system account that are not users (used for running background)
+uid <500 are system account(some need specific no. to work properly).
+now password are stored in shadow file.
+root user has access to shadow file
+login_name:encrypted_password:no_of days since password was changed:min no of days before pass can be changed:no of days after password must be changed:no of days before password expires warning:no of days for account must be disabled:reserved
+:::::::
+ADDING A USER:
+useradd command or adduser command
+/etc/skel file contains the startup files and hence these are copied to the home directory
+to change the deafult value of useradd command:
+useradd -D [-b/-e/-f/-g/-s] <corresponding values>
+REMOVING A USER:
+userdel command to removethe detail from/etc/passwd file use -r parameter to remove home directory
+MODIFYING A USER:
+usermod command to modify primary and secondary group and user account field
+	-l to change login_name
+	-L lock the account
+	-p change the password
+	-U unlock the account
+passwd to change the password
+chpasswd reads login name passwordpairand updates the password
+	-e parameter with password to force the user to change the password to next login
+chsh,chage,chfn:shell,expiry date and comment respectively.
+********finger command allows you to find info about ppl on the system
+chage may have yyyy-mm-dd format
+numeric value from jan 1970
+:::::::::::::::::::::::::::
+LINUX GROUP:
+	multiple users to have same property
+	/etc/group
+		groupname:group pass:gid:list of user account
+		group has no name in list if it has default user only
+	creating new group:groupadd command(only creates empty group)
+	in usermod -g replaces the default group while -G add new group
+	groupmod command to modify fields in group file(-n changes the name of the group)
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+decoding the permissions:
+	- files
+	d directory
+	c character devices
+	l link
+	n network devices
+	b block devices
+(owner,group,everyone)
+umask command set default permission.0022 :first bit is sticky bit
+full permission for file is 666 and for directory is 777
+::::
+chmod command to change the permissions
++ adds the permission
+- removes that permission
+= assign that permission
+X execute if atleast one has executable 
+s set uid and gid on execution
+t to save the program text
+:::::::::::::::::::::::::::::::::::::::
+chown command to change the ownership of the file
+::
+file sharing
+sticky bit :file remain in memory after the process ends
+sgid make the directory group the owner of all the files
+suid make the user as owner
+0 all bit cleared
+1 sticky
+2 sgid
+3 sgid and sticky
+4 suid
+5 suid and sticky
+6 suid and sgid
+7 all
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Editors:
+VIM:
+	in normal mode:h-left,j-down,k-up,l-right
+	ctrl+f:one screen down
+	ctrl+b:one screen up
+	in normal mode pressing colon leads to commandline mode in message line
+	removed data from vim remains in aseperate register
+	we can use various key combination with y(yank) like w,$,d
+	to search a pattern :	/<text> 
+	to substitute use :s/<old_text>/<new_text>/
+	few things about substitute : :s/old/new/g replaces all occurences of old in a line
+	:%s with same as above replaces all the occurences in the file
+	:#,#s/ with same as above replaces all occureneces between mentioined line
+	:s/old/new/gc ask for replacement before replacement
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+							SHELL SCRIPTING
+set command to view environmental variable
+to get any special character in shell script which is generally not shown use backslash \
+while assigning a value to a variable there should not be any space between var name and equals sign
+backtick or accent greaves (`) assign the output of a command to a variable
+output redirection: command>file
+>> to append the command output to a file
+input redirection: command < file //takes the file as input to command
+wc command prvides number of lines,words,bytes of file
+inline input redirection : command << marker
+						do
+						do
+						marker //marker acts as delineater
+pipes used to se3nd output of 1 command to input of other command: command1|command2
+	both commands are run at same time and linked simultaneously.no intermediate file or buffers are needed. 
+	we can have more than one pipe
+expr command to integer arithemetic: use backslash with * operator
+$[operation] value of the operation without expr (we needn't bother about * in this case)
+bc as built in calculator is a programming langauge
+var=`bc << EOF
+options
+expression
+EOF
+`
+$? gives the exit status of the script
+exit command with parameter gives same output as the parameter(it is reduced to mod 255)
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+										STRUCTURED COMMANDS
+if command //to execute then part exit status should be zero
+then
+	commands
+fi
+in normal condition errors are also displayed at STDOUT
+if command; then
+	commands
+fi
+;;;;;;;;;;;
+if command; then
+	commands
+else
+	commands
+fi
+;;;;;;;;;;;
+if command1
+then
+	commands
+elif command2
+then
+	commands
+fi
+;;;;;;;;;;;;;;;;;;;
+if then statement cant evaluate any other condition other than exit status->test command does it.
+test condition
+if test condition
+then
+	commands
+fi
+;;;;;;
+if [ condition ] //alternate test condition also spaces are compulsory
+then
+	commands
+fi
+;;;;;;;;;;;;
+numerical comparision,string comparision,file comparision in test
+n1 -eq n2
+similarly -ge,-le,-gt,-lt,-ne
+*only integers are compared by this.
+String comparision:
+=,!=,<,>,-n(length greater than 0),-z(length=0)
+<,> should be escaped to make it diffrent from redirection
+also they are not same as in sort command
+and test command follows ASCII values to determine the < or >.
+if a variable was not defined it will be considered as string of length 0
+:::::
+FILE COMPARISION:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
