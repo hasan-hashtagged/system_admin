@@ -354,3 +354,61 @@ CASE COMMAND
 		*) default c3;;
 	esac
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+for var in list // for var in list; do
+do
+	commands
+done
+double quotation marks aren't included from list
+we can also have variable as array from where we can use the things
+var=$v1" txt" concatenates txt atlast of variable
+we can read values from output of a commands the command should be in accent greaves
+FIELD SEPERATOR:
+	IFS internal field seperator
+	default value is tab space and newline
+	we can temporary change the environmental variable eg IFS=$'\n' change it to only newline
+	we can save default value in some variable and assign it when needed
+	file globbing is a process of obtaining the path or producing file with the help of wild card character
+	we can combine listing and wild card method in loop
+for (( <ctype format> ))
+::::::::::::::::::::::::::::::::
+while test commands
+do
+	other commands
+done
+we can test more than one command in testing part but the last part will let you exit status
+until test commands //this terminates when there is zero exit status
+do
+	other commands
+done
+looping in a file can also be done
+break n //n is number of loop we want to come out to
+continue n //command to jump to the nth loop outside the inner loop
+"""""WE CAN REDIRECT OR PIPE OUR OUTPUT TO A FILE OR A COMMAND""''"""" done > file output are not shown in STDOUT
+	done | command can also be performed 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
