@@ -385,23 +385,42 @@ break n //n is number of loop we want to come out to
 continue n //command to jump to the nth loop outside the inner loop
 """""WE CAN REDIRECT OR PIPE OUR OUTPUT TO A FILE OR A COMMAND""''"""" done > file output are not shown in STDOUT
 	done | command can also be performed 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+WAYS OF RETREIVING DATA FROM USERS :
+1. COMMANDLINE PARAMETERS: add data value to commandline when you are executing it using positional parameter
+$0 to $9 ${10}
+$0 gives the path of process in execution.
+basename command strips out the program name from the path.
+its always better to check whether data exists there in positional parameter
+$# is special parameter to find the number of parameter entered
+${!#} is the last parameter entered (if nothing is entered then it is $0)
+we can assign variable to $# and it wont give last parmaeter as $0
+$* stores all parameter in single word
+$@ stores all parameters and lets you iterate through the values
+shift command downgrades the parameter (multipule shift is also possible : shift n)
+2. Options:
+	we can access options in same ways as parameter(simple options)
+	if options and parameters are both present then "--" is used to seperate them. It indicates end of option
+	if the option needs parameter then it looks like: -a p1 -b -c
+	using getopt command:
+		getopt options optstring parameter
+		list option which will be used place colon which require parameter
+	using it in script :
+		set -- `getopt...`
+		getopt does not work with sapces
+	getopts optstring variable //variable contains parameters
+	OPTARG AND OPTIND env variable to have corresponding parameter
+3. USER INPUT:
+	read command: read var;
+	echo -n suppresses newline character in the end
+	read -p :we can give prompt here in double quotes
+	we can give more variables to read command and if the input is more thann variable,then last var will hold all the value
+	if variable is not mentioned then it will be stored in REPLY env var.
+	-t sets time to enter the value,if timer expires we have non-zero exit status.(canbe used in if-else)
+	-n<no.> to number of input character
+	-s option to have text with same color as terminal(silent reading)
+	we can read it from file also
+	one way is : cat <file> | read <var> //if no lines are left it returns with non-zero exit status
 
 
 
