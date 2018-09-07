@@ -453,7 +453,7 @@ REDIRECTIONS:
 	lsof :list all open file descriptor -p to mention pid -d to mention descriptor
 	current pid: $$
 NULL FILE: /dev/null
-	any redirection to it will surppress the thing which is redirected
+	any redirection to it will suppress the thing which is redirected
 	if /dev/null is redirected to some file then that file becomes empty (often used to clear log files)
 TEMPORARY FILES:
 	/tmp directory available for temporary files in the system which can be automatically removed after bootup
@@ -461,4 +461,86 @@ TEMPORARY FILES:
 	-t option leads to make it in /tmp directory
 	-d option for creating a directory
 	tee command act as T for STDOUT (we get output as well as redirection to file mentioned in command)
-	
+:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::	
+						SCRIPT CONTROL
+ctrl+c interrupt signal //no ouptut
+ctrl+z pause the process
+trap command to intercept by script
+trap commands signal //commands will be executed when signal is obtained signal numberor name can be entered
+we can trap exit so that as scrupt exits we can perform desired task
+we can remove a trap by using - in place of commands
+running scripts in background mode add & after name
+we can run process in background without console
+nohup <process>/script //even thought we exxit terminal
+for output it will create a nohup.out file
+if you run nohup for more than two files then both output will be appended
+JOB CONTROL:
+	jobs command to view current jobs handled by shell
+	+ indicates the default job 
+	- indicates the job which will be default next
+	-l list pid also
+	-n only those jobs which have changed status
+	-r only running jobs -s only stopped
+to restart in background bg <jobno.>
+to restart in foreground fg <jobno.>
+PRIORTY:
+-20 highest to 20 lowest
+nice command decrease priorty
+nice -n 10 
+renice <pri> -p <pid> //changes priorty of running process
+::::::::::::
+STARTING PROCESS AT CERTAIN TIME:
+	at command when linux should run the script
+		at -f <filename> time //time can be hh:mm hh:mmAM noon,night,midnight,etc
+		can include date also mmddyy mm dd now+25 minutes,tomorrow,etc
+		jobs output are sent to mail of user (provided)
+		atq to view pending jobs
+		atrm <jobno> to remove job from queue
+	batch runs the script when system is at lowest load
+		batch -f filename time
+	REGULAR SCHEDULING OF JOBS:
+		cron program.
+		CRON TABLE
+			min hr dayofmonth month dayofweek command
+			to run script on lastday 00 12 * * * if[ `date  +%d -d tomorrow` = 01 ]; then command
+		Building cron table
+			listing a crontable : crontab -l
+			-e coomand to add something here
+		if system is not on at that time it will not run at that time
+			thus anacron program 
+			anacrontab
+				period delay identifier command //period in day,
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+run level:
+0 halt
+1 single user
+2 multi user without network
+3 full multiuser
+4 unused
+5 with windows
+6 reboot
+rc file determines what script to run during boot
+at bash shell startup we can change .bashrc to run specific program
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
