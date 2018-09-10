@@ -521,10 +521,31 @@ run level:
 6 reboot
 rc file determines what script to run during boot
 at bash shell startup we can change .bashrc to run specific program
-
-
-
-
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+function name {
+	commands
+}
+::::::
+name() {
+	commands
+}
+if two functions are defined with same name then overriding will happen.
+$? is the exit status obtained by lastcommand in functions
+return command
+we can get output by `funcname` and assign it to variable.
+the echo statement let u get value without getting it print here.
+for parameter passing: $0 functionname $1..other parameter
+the values passed are not the same value as main part,we have to manually pass it.
+we can use local commnad to declare a local variable inside function
+array can be passed by deassembling and reassembling inside the function similarly returning also needs the same
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+source command: executes the commands within shell cntext without creating new(source has alias .) and hence can be used as library
+we can define function in shell in the same way as in script ; is used to seperate newline
+function name {
+	commands
+}
+we cann define functioin in bashrc first we should source it there then add function
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
