@@ -544,14 +544,35 @@ we can define function in shell in the same way as in script ; is used to sepera
 function name {
 	commands
 }
-we cann define functioin in bashrc first we should source it there then add function
+we can define functioin in bashrc first we should source it there then add function
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-
-
-
+			CUSTOMIZATIONS:
+We can make a text menu in terminal using case command and each case can be having output as function
+select command is used to create menu
+select  var in list
+do
+	commands
+done
+this will create menu layout.It uses PS3 for prompt
+::::
+ADDING COLOR USING ESCAPE CODE:
+ANSI escape code begin with CSI(control sequence indicator)
+CSIn[;k]m //m is SGR esc. code ,n and k determine the part
+we can use more than one using semin colon
+	effect control code
+		0 normal 1 bold 2 faint 3 italics 4 underline 5 slow blink 6 fast 7 reverse bg and fg color 8 invisible txt
+	foreground
+		use two digit code start with 3
+		0 black 1 red 2 green 3 yellow 4 blue 5 magenta 6 cyan 7 white 
+	background
+		use two digit code start with 4
+CSI character :  ^[ is the ESC character obtained by (ctrl+v+esc) and hence CSI is ESC[
+we can use it in echo command. if using 2 CSI use double quotes 
+:::::::::::::::::::::::::::::::::::::
+DIALOG INCLUSION:
+	zenity and dialog utility are there for such thing
+	we can use them by redirecting it to file and then use zenity with vaious options available
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
