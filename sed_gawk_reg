@@ -1,0 +1,90 @@
+#THIS IS THE CONTINUATION OF LAST PART
+when manipulating text during shell script : commandline editor to edit text
+SED and GAWK
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+SED : stream editor that manipulates data set ahead of time by set of rues before editor process data
+	one line of data at a time and appy the rules given as command or command file
+	format : sed options scriptfile
+	options
+	-e script : add commands specified by script 
+	-f file  : add command specified in file
+	-n dont produce ouput unless print command
+	it applies to STDIN	 thus can be piped to sed
+	sed 's/oldtext/newtext/' substitution
+	sed file only sends modified text to STDOUT and not modifies the file
+	for multiple commands use -e and add more than one command with semicolon with no space btwn semicolon and end of command
+	if we give ' and press enter then get PS2 for entry till we press ' and givethe filename to modify
+	if there are lot of edits just put them in a file and use -f option
+	SUBSITUTION OPTION:
+		by default it substitute first occurence in a line
+		thus substitution flags
+		's/old/new/flag'
+		num :which occurence to replace
+		g :all occurences
+		p :print line which contain matching pattern.often used with -n
+		w file :write the output to file
+		use backslash if we come across delimiter eg sed 's/\/bin\/bash/\/bin\/csh/' /etc/passwd
+		or ! can be used as	delimiter eg sed 's!/bin/bash!/bin/csh!' /etc/passwd
+		;;
+		ADDRESS command if we want to modify certain part only
+		[address]command to modify only address specified
+		address {
+			commands
+		} to group of command
+				numerical addressing : specify line number eg sed '2s/old/new/' datafile 
+				we can give range seperated by comma 2,4s/..
+				7,$s/.. $ represent till end
+				TEXT addressing: /pattern/command eg '/kan/s/old/new/' datafile
+		;;
+		grouping commands
+			use multiple commands inside the braces to apply it to line 
+			'2{
+			s/...
+			s/...
+			}' datafile
+		;;
+		deleting lines: d command to delete lines with matching patterns
+		we can use numerical and pattern addressing in it.
+		;;
+		inserting and appending text: 
+			i command insert line before the specified line
+			a command appends i.e.insert line after specified line
+			sed '[address]command\
+			line added' (if echo is there command take the pattern to be echoed as address) and it cant be done for range
+		;;
+		changing lines:
+			c command is used 
+			we can use addressing here with cmbination of pattern and number. it replaces the line with the value assigned like insert
+			if range is used it will replace all with only one line
+		;;
+		transform command:
+			y command (only command to work on single character)
+			[address]y/inchars/outchars/
+		;;
+		printing: '=' is used to print line number which is modified or pattern matched
+				  'l' is used to print ascii character of nonprintable character
+		;;;
+		writing and reading from and to file: '[address]w filename' '[address]r filename' datafile 
+		r used with d to act  as placeholder for specified pattern
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+GAWK: programming like environment
+	gawk option program file
+	options:
+	-F fs :field seperator to delineate
+	-f file :filename from where program is read
+	-v var=value :define a value and defqault value is used in gawk program
+	-mf num :max no. of fields to be used in a data file
+	-mr num :max record sizeof data file
+	-W keyword :warning level or compatibility
+	commands between braces '{commands}' as command is assumed to be single text
+	assigns variable to each data field
+	$0 entire line $1 first data field ... 
+	data field seperated by field seperator(default is white space)
+	multiple command using semicolon
+	else prompt PS2 by pressing enter after '{
+	the variable in gawk program dont need $ to reference them
+	gawk also let u specify when program should run.
+	BEGIN keyword to run program before start gawk 'BEGIN {print "test"}' filename
+	END keyword to add footer after terminating
+	FS variable can be used inside the script to assign field seperator
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

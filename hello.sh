@@ -2,3 +2,4 @@
 function hello {
 	echo "kaka"
 }
+hello
