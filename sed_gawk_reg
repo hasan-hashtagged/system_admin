@@ -88,3 +88,60 @@ GAWK: programming like environment
 	END keyword to add footer after terminating
 	FS variable can be used inside the script to assign field seperator
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+							REGULAR EXPRESSION
+predifined pattern that linux utility uses for filtering text
+use of wild card characters
+BRE patterns:
+	1)PLAIN TEXT: normal text with which we generally deal
+	reguler expression doesnt care where pattern matches.if pattern match it transfer the string.
+	REGULAR EXPRESSIONS ARE CASE SENSITIVE
+	we dont have to limit the pattern to whole word,whatever part matched of word matched the complete pattern,that line will be transfered.
+	no limit to single text as space is also treated as character
+	2)SPECIAL CHARACTERS: . * [ ] ^ $ { } \ + ? | ( ) are the special characters.for using them as normal character use \ before them
+		otherwise they have special meaning
+		a)Anchor Character:to anchor pattern either to beginning or end
+		beginning:(^) caret defines that a pattern starts at beginning of line only those will be matched.Caret should be used before pattern to treat it as spcl character otw itacts as normal character
+		ending:($) should be used at the end of patern to match with the end.howeverin this case whole pattern should match with text not a part of text.
+		we can combine them to get a specific line containing that pattern.
+			sed '/^$/d' datafile removes the bank lines present in the datafile.i.e /^$/ is used to identify blank lines
+		 b)Dot Character: . used to match only one character whatever it is to match the pattern.However if newline is there it wont
+		 	also if . is at last chacter of alphabet pattern it will not match with space
+		 c)Character Classes:if we want only certain character to match the pattern we put in [] this is character class.
+		 		if any of the one in the bracket let the pattern match it let the line match.eg sed '/[ch]at/p' filename.
+		 		It will not match space as it is not mentioned in character class.
+		 		we can use various sequential character classes in condition when we are not sure about text to match
+		 		also use to match pin code as they can be numbers also in character class.we can add anchor to get desired result
+		 		check the misspelled words
+		 Negating character classes:[^chacters] will let you find the match which is not present in the character class
+		 Using Ranges:dash (-) to give range to character classes
+		 			we can also give non-continuous range eg [a-ch-m] this will match it from a to c and h to m
+		 Special character classes:
+		 	[[:alpha:]] match alphabet [[:digit:]] numeral [[:lower:]] lowercase alphabet [[:punct:]] punctuation character
+		 	[[:alnum:]] alphanumeric  [[:blank:]] space or tab [[:print:]] any printable character [[:space:] any white space
+		 d) The Asterisk: * the character before it zero or more than one time.
+		 		combining .* (character class and *) can help us get some good result : .* any character any number of time lead to match
+		 		same with character class
+		 GAWK also recognized POSIX ERE pattern
+		 Question mark: ? matches 0 or 1 character preceeding ?
+		 Plus Sign: + character matches atleast one charcter
+		 Using braces: {m} appear exactly m times {m,n} atleast m and not more than n times for that we need re-interval option also
+		 Pipe symbols: | used to or the patterns if anyone of that matches
+		 Grouping expression:
+		 		grouped in paranthesis regular expression pattern can be grouped together in it.
+		 APPLICATIONS:
+		 	COUNTING DIRECTORY: storing output of sed in variable andusing iit as list in for loop
+		 	Validating Phone Numbers and Parsing email address
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+	
+
+
+
+
+
+
+
+
+
+
+
+
